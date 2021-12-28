@@ -1,0 +1,17 @@
+FROM node:12.16.1
+
+#Maintainer
+LABEL maitainer="thangavel.vel28@outlook.com"
+COPY . /src
+WORKDIR /src
+
+COPY package.json .
+
+RUN npm install --unsafe-perm
+RUN npm install -g pm2
+
+COPY . .
+
+EXPOSE 2000
+
+CMD ["pm2", "start", "server.js", "--no-daemon"]
